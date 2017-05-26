@@ -45,14 +45,14 @@ looker_pull <- function(look_id,
 #' @param path Path to where DB credentials are. Defauts to where credentials are saved on Andrew's work computer.
 #' @keywords database
 #' @importFrom DBI dbConnect dbDriver
-#' @import RPOSTgreSQL
+#' @import RPostgreSQL
 #' @export
 #' @examples
 #' read_replica_query()
 
 read_replica_query <- function(sql, path = "~/wellbe-analytics/dbicred.r") {
   # library(DBI)
-  library(RPostgreSQL)
+  # library(RPostgreSQL)
   source(path)
   
   drv <- DBI::dbDriver("PostgreSQL") 
