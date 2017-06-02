@@ -10,12 +10,12 @@
 #' @param \dots variables to group by
 #' @export
 count_pct <- function(x, ..., wt=NULL, sort=TRUE) {
-  
+
   vars <- lazyeval::lazy_dots(...)
   wt <- substitute(wt)
   counted <- count_(x, vars, wt=wt, sort=sort)
-  mutate(counted, pct=n/100, percent=scales::percent(pct))
-  
+  percentaged <- mutate(counted, pct=n/sum(n), percent=scales::percent(pct))
+  ungroup(percentaged)
 }
 
 #' Make column names great again
@@ -24,11 +24,11 @@ count_pct <- function(x, ..., wt=NULL, sort=TRUE) {
 #' @return lower-case, no punct, underscored strings
 #' @export
 mcga <- function(x) {
-  
+
   x <- tolower(x)
   x <- gsub("[[:space:][:punct:]]+", " ", x)
   x <- trimws(x)
   x <- gsub(" ", "_", x)
   x
-  
+
 }
